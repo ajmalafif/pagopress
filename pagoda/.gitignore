@@ -2,7 +2,7 @@
 # WordPress files
 # /wp
 # /app
-# .htaccess
+.htaccess
 wp/.htaccess
 !pagoda/.htaccess
 

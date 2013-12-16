@@ -16,6 +16,10 @@ Upon cloning,
 + AWS Cloudfront & S3.
 + WordPress SEO.
 
+## Personalization
+
+1. In `wp-config.php` setup 
+
 <br>
 <hr>
 
@@ -30,9 +34,7 @@ Use it to jump-start your WordPress site repos, or fork it and customize it to y
 
 * You have [Composer](https://github.com/composer/composer) installed.
 * WordPress as a root install in `/wp/`
-* Custom content directory in `/wp-content/` (cleaner)
-* Media uploads directory will be in `/media/` outside `wp` folder
-* Changes can be made to the `/wp-content/wp-plugins/wp-setup.php` file to customize options.
+* Custom content directory in `/app/` (cleaner)
 
 ## Questions & Answers
 
