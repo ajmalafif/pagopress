@@ -1,0 +1,27 @@
+
+# WordPress files
+# /wp
+# /app
+.htaccess
+wp/.htaccess
+!pagoda/.htaccess
+
+secrets/*
+!secrets/*.example
+!secrets/*.gitkeep
+
+/shared
+/local-config.php
+/sql-dump-*.sql
+/db-sync
+
+# Composer files
+composer.*
+/vendor
+/nbproject
+composer.lock
+
+# Misc
+.DS_Store
+/nbproject
+bin/*

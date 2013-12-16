@@ -5,6 +5,7 @@ web1:
   - app/plugins/
   after_build:
   - "mv pagoda/.htaccess .htaccess"
+  - "mv pagoda/.gitignore .gitignore"
   - "rm -R pagoda"
   php_extensions:
     - mysql
