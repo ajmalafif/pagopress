@@ -6,15 +6,15 @@
 // ===================================================
 // Load database info and local development parameters
 // ===================================================
+
 if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	define( 'WP_LOCAL_DEV', true );
 	include( dirname( __FILE__ ) . '/local-config.php' );
 } else {
-	define( 'WP_LOCAL_DEV', false );
-	define( 'DB_NAME', '%%DB_NAME%%' );
-	define( 'DB_USER', '%%DB_USER%%' );
-	define( 'DB_PASSWORD', '%%DB_PASSWORD%%' );
-	define( 'DB_HOST', '%%DB_HOST%%' ); // Probably 'localhost'
+    define('DB_NAME', $_SERVER['DB1_NAME']);
+    define('DB_USER', $_SERVER['DB1_USER']);
+    define('DB_PASSWORD', $_SERVER['DB1_PASS']);
+    define ('DB_HOST', $_SERVER['DB1_HOST'] . ':' . $_SERVER['DB1_PORT']);
 }
 
 // ========================
