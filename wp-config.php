@@ -21,6 +21,7 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 // Custom Content Directory
 // ========================
 
+define('WP_DEFAULT_THEME', 'roots');
 // define( 'WP_INSTALL_DIR', dirname( __FILE__ ) .'/wp' );
 define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp/');
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/app' );
