@@ -1,8 +1,7 @@
 web1: 
   name: wp-web1
   shared_writable_dirs: 
-  - app/uploads/
-  - app/plugins/
+  - wp/wp-content/uploads/
   after_build:
   - "mv pagoda/.htaccess .htaccess"
   - "mv pagoda/.gitignore .gitignore"
