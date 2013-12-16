@@ -3,6 +3,9 @@ web1:
   shared_writable_dirs: 
   - app/uploads/
   - app/plugins/
+  after_build:
+  - "mv pagoda/.htaccess .htaccess"
+  - "rm -R pagoda"
   php_extensions:
     - mysql
     - gd
