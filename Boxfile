@@ -1,0 +1,17 @@
+web1: 
+  name: wp-web1
+  shared_writable_dirs: 
+  - app/uploads/
+  - app/plugins/
+  php_extensions:
+    - mysql
+    - gd
+    - mbstring
+    - exif
+    - iconv
+    - mcrypt
+    - zip
+    - curl
+db1:
+  name: wp-db1
+  type: mysql
