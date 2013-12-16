@@ -16,7 +16,6 @@ secrets/*
 /db-sync
 
 # Composer files
-composer.*
 /vendor
 /nbproject
 composer.lock
