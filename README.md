@@ -4,7 +4,7 @@ Clone this repo.
 
 1. In your CLI, run `composer install.`
 
-2. configure `local-config.php` based on `local-config-sample.php`. (For subdirectory MAMP, please read the comment in the file. More in-depth [http://discourse.roots.io/t/setup-local-wordpress-skeleton-on-mamp-to-work-like-in-composer-with-wordpress-screencast/898](here).)
+2. configure `local-config.php` based on `local-config-sample.php`. (For subdirectory MAMP, please read the comment in the file. More in-depth [here](http://discourse.roots.io/t/setup-local-wordpress-skeleton-on-mamp-to-work-like-in-composer-with-wordpress-screencast/898).)
 
 3. Hack away!
 
