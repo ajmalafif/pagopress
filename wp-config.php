@@ -15,15 +15,17 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
     define('DB_USER', $_SERVER['DB1_USER']);
     define('DB_PASSWORD', $_SERVER['DB1_PASS']);
     define ('DB_HOST', $_SERVER['DB1_HOST'] . ':' . $_SERVER['DB1_PORT']);
+    define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp/');
+    define( 'WP_HOME', 'http://' . $_SERVER['HTTP_HOST'] . );
 }
 
 // ========================
 // Custom Content Directory
+// define( 'WP_INSTALL_DIR', dirname( __FILE__ ) .'/wp' );
+// define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp/');
 // ========================
 
 define('WP_DEFAULT_THEME', 'roots');
-// define( 'WP_INSTALL_DIR', dirname( __FILE__ ) .'/wp' );
-define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp/');
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/app' );
 define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/app' );
 
