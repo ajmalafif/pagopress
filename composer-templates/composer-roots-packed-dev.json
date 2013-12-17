@@ -1,7 +1,7 @@
 {
     "require": {
         "php": ">=5.3.0",
-        "wordpress": "3.7.1",
+        "wordpress": "3.8.*",
         "composer/installers": "~1.0",
         "fancyguy/webroot-installer": "1.0.0",
         "fancyguy/wordpress-monolog": "dev-master",
@@ -12,10 +12,10 @@
         "wpackagist/google-sitemap-generator": "3.*",
         "roots/roots": "6.5.*"
     },
-	"require-dev" : {
-		"wpackagist/regenerate-thumbnails": "*@dev",
-		"wpackagist/developer"            : "~1"
-	},
+    "require-dev" : {
+        "wpackagist/regenerate-thumbnails": "*@dev",
+        "wpackagist/developer"            : "~1"
+    },
     "repositories": [
         {
             "type": "composer",
@@ -26,10 +26,10 @@
             "package": {
                 "name": "wordpress",
                 "type": "webroot",
-                "version": "3.7.1",
+                "version": "3.8",
                 "dist": {
                     "type": "zip",
-                    "url": "https://github.com/WordPress/WordPress/archive/3.7.1.zip"
+                    "url": "https://github.com/WordPress/WordPress/archive/3.8.zip"
                 },
                 "require": {
                     "fancyguy/webroot-installer": "1.0.0"

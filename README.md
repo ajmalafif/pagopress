@@ -1,9 +1,11 @@
 ## Installation
 
-Upon cloning, 
+Clone this repo. 
 
-1. configure `local-config.php` based on `local-config-sample.php`.
-2. In CLI, run `composer install`.
+1. In your CLI, run `composer install.`
+
+2. configure `local-config.php` based on `local-config-sample.php`.
+
 3. Hack away!
 
 #### TODO:-
