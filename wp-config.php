@@ -16,7 +16,7 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
     define('DB_PASSWORD', $_SERVER['DB1_PASS']);
     define ('DB_HOST', $_SERVER['DB1_HOST'] . ':' . $_SERVER['DB1_PORT']);
     define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp/');
-    define( 'WP_HOME', 'http://' . $_SERVER['HTTP_HOST'] . );
+    define( 'WP_HOME', 'http://' . $_SERVER['HTTP_HOST'] . '/');
 }
 
 // ========================
