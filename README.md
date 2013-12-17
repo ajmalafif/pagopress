@@ -12,11 +12,11 @@ Clone this repo.
 
 ###### customized Roots
 + Remove roots activation script.
-+ Select `Roots` as default themes inside `local-config.php`
++ ~~Select `Roots` as default themes inside `local-config.php`~~
 
 ###### must-have plugins
-+ AWS Cloudfront & S3.
-+ WordPress SEO.
++ ~~AWS Cloudfront & S3.~~
++ ~~WordPress SEO.~~
 
 ## Personalization
 
