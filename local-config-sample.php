@@ -20,4 +20,6 @@ define( 'DB_HOST', 'localhost' ); // Probably 'localhost'
 1. Especially for subdirectory MAMP, point content url to the right folder. (Notice for WP_CONTENT_URL it's pointed to '../app' while WP_HOME is just '../').
 
 More explanation here: http://discourse.roots.io/t/setup-local-wordpress-skeleton-on-mamp-to-work-like-in-composer-with-wordpress-screencast/898
+
+2. Replace Roots override activation when switching themes: https://gist.github.com/ajmalafif/8037345
 */
