@@ -20,12 +20,14 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 }
 
 // ========================
-// Custom Content Directory
-// define( 'WP_INSTALL_DIR', dirname( __FILE__ ) .'/wp' );
-// define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp/');
-// define( 'AWS_ACCESS_KEY_ID', '********************' );
-// define( 'AWS_SECRET_ACCESS_KEY', '****************************************' );
-// ========================
+/* Custom Content Directory
+define( 'WP_INSTALL_DIR', dirname( __FILE__ ) .'/wp' );
+define( 'WP_SITEURL', 'http://' . $_SERVER['HTTP_HOST'] . '/wp/');
+Replace Roots override activation when switching themes: 
+https://gist.github.com/ajmalafif/8037345
+define( 'AWS_ACCESS_KEY_ID', '********************' );
+define( 'AWS_SECRET_ACCESS_KEY', '****************************************' );
+ ======================== */
 
 define('WP_DEFAULT_THEME', 'roots');
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/app' );
