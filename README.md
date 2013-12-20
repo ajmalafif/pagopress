@@ -6,6 +6,8 @@ Clone this repo.
 
 2. configure `local-config.php` based on `local-config-sample.php`. (For subdirectory MAMP, please read the comment in the file. More in-depth [here](http://discourse.roots.io/t/setup-local-wordpress-skeleton-on-mamp-to-work-like-in-composer-with-wordpress-screencast/898).)
 
+	2.1 I think #2 is now redundant as the local file has already has SITE_URL covered....
+
 3. Hack away!
 
 #### TODO:-
