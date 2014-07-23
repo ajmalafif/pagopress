@@ -1,7 +1,7 @@
 {
     "require": {
         "php": ">=5.3.0",
-        "wordpress": "3.8.*",
+        "wordpress": "3.9.*",
         "composer/installers": "~1.0",
         "fancyguy/webroot-installer": "1.0.0",
         "wpackagist/amazon-web-services": "0.1.*",
@@ -9,7 +9,7 @@
         "wpackagist/w3-total-cache": "0.9.*",
         "wpackagist/wordpress-seo": "1.4.*",
         "wpackagist/google-sitemap-generator": "3.*",
-        "roots/roots": "6.5.*"
+        "roots/roots": "7.0.*"
     },
     "repositories": [
         {
@@ -21,10 +21,10 @@
             "package": {
                 "name": "wordpress",
                 "type": "webroot",
-                "version": "3.8",
+                "version": "3.9.1",
                 "dist": {
                     "type": "zip",
-                    "url": "https://github.com/WordPress/WordPress/archive/3.8.zip"
+                    "url": "https://github.com/WordPress/WordPress/archive/3.9.1.zip"
                 },
                 "require": {
                     "fancyguy/webroot-installer": "1.0.0"
@@ -36,10 +36,10 @@
             "package": {
                 "name": "roots/roots",
                 "type": "wordpress-theme",
-                "version": "6.5.1",
+                "version": "7.0.0",
                 "dist": {
                     "type": "zip",
-                    "url": "https://github.com/roots/roots/archive/6.5.1.zip"
+                    "url": "https://github.com/roots/roots/archive/7.0.0.zip"
                 },
                 "require": {
                     "php": ">=5.3.0",
