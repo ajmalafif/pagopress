@@ -244,6 +244,7 @@
  2013-09-28     3.3     Fixed problem with file permission checking
                         Filter out hashs (#) in URLs
  2013-11-24     3.4     Fixed deprecation warnings in PHP 5.4, thanks to Dion Hulse!
+ 2014-04-10     3.4.1   Fixed compatibility with mysqli
 
  Maybe Todo:
  ==============================================================================

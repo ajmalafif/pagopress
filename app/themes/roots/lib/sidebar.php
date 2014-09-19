@@ -4,11 +4,12 @@
  *
  * If any of the is_* conditional tags or is_page_template(template_file) checks return true, the sidebar will NOT be displayed.
  *
+ * @link http://roots.io/the-roots-sidebar/
+ *
  * @param array list of conditional tags (http://codex.wordpress.org/Conditional_Tags)
  * @param array list of page templates. These will be checked via is_page_template()
  *
  * @return boolean True will display the sidebar, False will not
- *
  */
 class Roots_Sidebar {
   private $conditionals;
@@ -29,10 +30,13 @@ class Roots_Sidebar {
   }
 
   private function check_conditional_tag($conditional_tag) {
-    if (is_array($conditional_tag)) {
-      return $conditional_tag[0]($conditional_tag[1]);
+    $conditional_arg = is_array($conditional_tag) ? $conditional_tag[1] : false;
+    $conditional_tag = $conditional_arg ? $conditional_tag[0] : $conditional_tag;
+
+    if (function_exists($conditional_tag)) {
+      return $conditional_arg ? $conditional_tag($conditional_arg) : $conditional_tag();
     } else {
-      return $conditional_tag();
+      return false;
     }
   }
 

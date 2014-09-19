@@ -1,7 +1,7 @@
 <?php
 
 /*
- $Id: sitemap.php 809744 2013-11-24 18:44:57Z arnee $
+ $Id: sitemap.php 908446 2014-05-05 19:58:20Z arnee $
 
  Google XML Sitemaps Generator for WordPress
  ==============================================================================
@@ -25,7 +25,7 @@
  Plugin Name: Google XML Sitemaps
  Plugin URI: http://www.arnebrachhold.de/redir/sitemap-home/
  Description: This plugin will generate a special XML sitemap which will help search engines like Google, Yahoo, Bing and Ask.com to better index your blog.
- Version: 3.4
+ Version: 3.4.1
  Author: Arne Brachhold
  Author URI: http://www.arnebrachhold.de/
  Text Domain: sitemap
@@ -96,6 +96,71 @@ class GoogleSitemapGeneratorLoader {
 		if(!empty($_GET["sm_ping_service"])) {
 			GoogleSitemapGeneratorLoader::CallShowPingResult();
 		}
+
+		//If somebody had v4 installed and downgraded, delete rewrite rules and rename backup sitemaps back if available.
+		if (get_option("sm_rewrite_done", false)) {
+			add_action('wp_loaded', array(__CLASS__, 'DeleteV4Rewrite'), 9999, 1);
+		}
+	}
+
+
+	/**
+	 * Returns the path to the WordPress root directory
+	 *
+	 * @return string
+	 */
+	static function GetHomePath() {
+		$home = get_option( 'home' );
+		$siteurl = get_option( 'siteurl' );
+		if ( ! empty( $home ) && 0 !== strcasecmp( $home, $siteurl ) ) {
+			$wp_path_rel_to_home = str_ireplace( $home, '', $siteurl ); /* $siteurl - $home */
+			$pos = strripos( str_replace( '\\', '/', $_SERVER['SCRIPT_FILENAME'] ), trailingslashit( $wp_path_rel_to_home ) );
+			$home_path = substr( $_SERVER['SCRIPT_FILENAME'], 0, $pos );
+			$home_path = trailingslashit( $home_path );
+		} else {
+			$home_path = ABSPATH;
+		}
+
+		return str_replace( '\\', '/', $home_path );
+	}
+
+	/**
+	 * Deleted rewrite rules of v4 plugin and trie to rename the backup sitemap files back if available.
+	 * Also restores some default options which were not needed anymore in v4.
+	 *
+	 * @return bool
+	 */
+	public static function DeleteV4Rewrite() {
+		global $wp_rewrite;
+		$wp_rewrite->flush_rules(false);
+		delete_option("sm_rewrite_done");
+
+		$path = @trailingslashit(self::GetHomePath());
+
+		$res = true;
+
+		if(@file_exists($f = $path . "sitemap.backup.xml"))     if(@!rename($f, $path . "sitemap.xml")) $res = false;
+		if(@file_exists($f = $path . "sitemap.backup.xml.gz"))  if(@!rename($f, $path . "sitemap.xml.gz")) $res = false;
+
+		delete_option("sm_status");
+
+		//Init default options
+		$options = get_option("sm_options");
+		if($options && is_array($options)) {
+			$options["sm_b_prio_provider"] = "GoogleSitemapGeneratorPrioByCountProvider"; //Provider for automatic priority calculation
+			$options["sm_b_filename"] = "sitemap.xml"; //Name of the Sitemap file
+			$options["sm_b_xml"] = true; //Create a .xml file
+			$options["sm_b_gzip"] = true; //Create a gzipped .xml file(.gz) file
+			$options["sm_b_ping"] = true; //Auto ping Google
+			$options["sm_b_pingmsn"] = true; //Auto ping MSN
+			$options["sm_b_auto_enabled"] = true; //Rebuild sitemap when content is changed
+			$options["sm_b_auto_delay"] = true; //Use WP Cron to execute the building process in the background
+			$options["sm_b_style_default"] = true; //Use default style
+			$options["sm_b_robots"] = true; //Add sitemap location to WordPress' virtual robots.txt file
+			update_option("sm_options", $options);
+		}
+
+		return $res;
 	}
 
 	/**

@@ -2,12 +2,12 @@
 /**
  * Use Bootstrap's media object for listing comments
  *
- * @link http://twitter.github.com/bootstrap/components.html#media
+ * @link http://getbootstrap.com/components/#media
  */
 class Roots_Walker_Comment extends Walker_Comment {
   function start_lvl(&$output, $depth = 0, $args = array()) {
     $GLOBALS['comment_depth'] = $depth + 1; ?>
-    <ul <?php comment_class('media unstyled comment-' . get_comment_ID()); ?>>
+    <ul <?php comment_class('media list-unstyled comment-' . get_comment_ID()); ?>>
     <?php
   }
 
@@ -38,12 +38,15 @@ class Roots_Walker_Comment extends Walker_Comment {
       call_user_func($args['end-callback'], $comment, $args, $depth);
       return;
     }
+    // Close ".media-body" <div> located in templates/comment.php, and then the comment's <li>
     echo "</div></li>\n";
   }
 }
 
-function roots_get_avatar($avatar) {
+function roots_get_avatar($avatar, $type) {
+  if (!is_object($type)) { return $avatar; }
+
   $avatar = str_replace("class='avatar", "class='avatar pull-left media-object", $avatar);
   return $avatar;
 }
-add_filter('get_avatar', 'roots_get_avatar');
+add_filter('get_avatar', 'roots_get_avatar', 10, 2);

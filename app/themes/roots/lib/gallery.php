@@ -5,7 +5,7 @@
  * Re-create the [gallery] shortcode and use thumbnails styling from Bootstrap
  * The number of columns must be a factor of 12.
  *
- * @link http://twbs.github.io/bootstrap/components/#thumbnails
+ * @link http://getbootstrap.com/components/#thumbnails
  */
 function roots_gallery($attr) {
   $post = get_post();
@@ -44,7 +44,7 @@ function roots_gallery($attr) {
     'size'       => 'thumbnail',
     'include'    => '',
     'exclude'    => '',
-    'link'       => 'file'
+    'link'       => ''
   ), $attr));
 
   $id = intval($id);
@@ -85,19 +85,29 @@ function roots_gallery($attr) {
 
   $i = 0;
   foreach ($attachments as $id => $attachment) {
-    $image = ('file' == $link) ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
+    switch($link) {
+      case 'file':
+        $image = wp_get_attachment_link($id, $size, false, false);
+        break;
+      case 'none':
+        $image = wp_get_attachment_image($id, $size, false, array('class' => 'thumbnail img-thumbnail'));
+        break;
+      default:
+        $image = wp_get_attachment_link($id, $size, true, false);
+        break;
+    }
     $output .= ($i % $columns == 0) ? '<div class="row gallery-row">': '';
     $output .= '<div class="' . $grid .'">' . $image;
-    
+
     if (trim($attachment->post_excerpt)) {
       $output .= '<div class="caption hidden">' . wptexturize($attachment->post_excerpt) . '</div>';
     }
-    
+
     $output .= '</div>';
     $i++;
     $output .= ($i % $columns == 0) ? '</div>' : '';
   }
-  
+
   $output .= ($i % $columns != 0 ) ? '</div>' : '';
   $output .= '</div>';
 

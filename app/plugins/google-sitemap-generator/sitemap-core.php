@@ -1,7 +1,7 @@
 <?php
 /*
 
- $Id: sitemap-core.php 809741 2013-11-24 18:32:07Z arnee $
+ $Id: sitemap-core.php 890782 2014-04-10 19:16:31Z arnee $
 
 */
 
@@ -696,7 +696,7 @@ class GoogleSitemapGenerator {
 	/**
 	 * @var Version of the generator in SVN
 	*/
-	var $_svnVersion = '$Id: sitemap-core.php 809741 2013-11-24 18:32:07Z arnee $';
+	var $_svnVersion = '$Id: sitemap-core.php 890782 2014-04-10 19:16:31Z arnee $';
 
 	/**
 	 * @var array The unserialized array with the stored options
@@ -1791,26 +1791,46 @@ class GoogleSitemapGenerator {
 				$this->SetOption("b_safemode",true);
 			}
 
+			$useMysqli= isset($wpdb->use_mysqli) && $wpdb->use_mysqli == true;
+
+
+
 			if($this->GetOption("b_safemode")===true) {
-				$postRes = mysql_query($sql,$wpdb->dbh);
+				$postRes = $useMysqli?mysqli_query($wpdb->dbh, $sql):mysql_query($sql,$wpdb->dbh);
 				if(!$postRes) {
-					trigger_error("MySQL query failed: " . mysql_error(),E_USER_NOTICE); //E_USER_NOTICE will be displayed on our debug mode
+					trigger_error("MySQL query failed: " . $useMysqli?mysqli_error($wpdb->dbh):mysql_error(),E_USER_NOTICE); //E_USER_NOTICE will be displayed on our debug mode
 					return;
 				}
 			} else {
-				$con = mysql_connect(DB_HOST,DB_USER,DB_PASSWORD,true);
+				if($useMysqli) {
+					$con = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
+				} else {
+					$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD, true);
+				}
 				if(!$con) {
-					trigger_error("MySQL Connection failed: " . mysql_error(),E_USER_NOTICE);
+					trigger_error("MySQL Connection failed: " . $useMysqli?mysqli_error($con):mysql_error(),E_USER_NOTICE);
 					return;
 				}
-				if(!mysql_select_db(DB_NAME,$con)) {
-					trigger_error("MySQL DB Select failed: " . mysql_error(),E_USER_NOTICE);
+
+				if($useMysqli) {
+					$select = mysqli_select_db($con, DB_NAME);
+				} else {
+					$select = mysql_select_db(DB_NAME,$con);
+				}
+
+				if(!$select) {
+					trigger_error("MySQL DB Select failed: " . $useMysqli?mysqli_error($con):mysql_error(),E_USER_NOTICE);
 					return;
 				}
-				$postRes = mysql_unbuffered_query($sql,$con);
+
+				if($useMysqli) {
+					$postRes = mysqli_query($con, $sql, MYSQLI_USE_RESULT);
+				} else {
+					$postRes = mysql_unbuffered_query($sql,$con);
+				}
 
 				if(!$postRes) {
-					trigger_error("MySQL unbuffered query failed: " . mysql_error(),E_USER_NOTICE);
+					trigger_error("MySQL unbuffered query failed: " . $useMysqli?mysqli_error($con):mysql_error(),E_USER_NOTICE);
 					return;
 				}
 			}
@@ -1844,8 +1864,9 @@ class GoogleSitemapGenerator {
 				$minPrio=$this->GetOption('pr_posts_min');
 
 
+
 				//Cycle through all posts and add them
-				while($post = mysql_fetch_object($postRes)) {
+				while($post = ($useMysqli?mysqli_fetch_object($postRes):mysql_fetch_object($postRes))) {
 
 					//Fill the cache with our DB result. Since it's incomplete (no text-content for example), we will clean it later.
 					$cache = array(&$post);
@@ -1941,7 +1962,16 @@ class GoogleSitemapGenerator {
 				unset($postRes);
 				unset($prioProvider);
 
-				if($this->GetOption("b_safemode")!==true && $con) mysql_close($con);
+				if($this->GetOption("b_safemode")!==true && $con) {
+
+					if($useMysqli) {
+						mysqli_close($con);
+					} else {
+						mysql_close($con);
+					}
+
+
+				}
 			}
 			if($debug) $this->AddElement(new GoogleSitemapGeneratorDebugEntry("Debug: End Postings"));
 		}
