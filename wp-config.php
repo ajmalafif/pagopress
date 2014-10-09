@@ -9,6 +9,8 @@
 
 if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	define( 'WP_LOCAL_DEV', true );
+    // For localhost uncomment below
+    // define('WP_ENV', 'development');
 	include( dirname( __FILE__ ) . '/local-config.php' );
 } else {
     define('DB_NAME', $_SERVER['DB1_NAME']);
