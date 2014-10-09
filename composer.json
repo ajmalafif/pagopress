@@ -7,8 +7,8 @@
         "wpackagist/amazon-web-services": "0.1.*",
         "wpackagist/amazon-s3-and-cloudfront": "0.6.*",
         "wpackagist/w3-total-cache": "0.9.*",
-        "wpackagist/wordpress-seo": "1.4.*",
-        "wpackagist/google-sitemap-generator": "3.*",
+        "wpackagist/wordpress-seo": "1.6.*",
+        "wpackagist/google-sitemap-generator": "4.*",
         "roots/roots": "7.0.*"
     },
     "repositories": [
