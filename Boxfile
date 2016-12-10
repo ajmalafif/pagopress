@@ -1,11 +1,10 @@
-web1: 
+web1:
   name: wp-web1
-  shared_writable_dirs: 
+  httpd_error_log: true
+  version: 5.6
+  stability: production
+  network_dirs:
   - wp/wp-content/uploads/
-  after_build:
-  - "mv pagoda/.htaccess .htaccess"
-  - "mv pagoda/.gitignore .gitignore"
-  - "rm -R pagoda"
   php_extensions:
     - mysql
     - gd
@@ -15,6 +14,17 @@ web1:
     - mcrypt
     - zip
     - curl
-db1:
-  name: wp-db1
+database1:
+  name: wp-db
   type: mysql
+storage1:
+  name: file_storage
+  type: nfs
+build:
+  before_exec:
+    - "mv pagoda-theme/.gitignore app/themes/sage/.gitignore"
+    - "rm -R pagoda-theme"
+  after_exec:
+    - "mv pagoda/.htaccess .htaccess"
+    - "mv pagoda/.gitignore .gitignore"
+    - "rm -R pagoda"
